@@ -9,8 +9,6 @@ services:
       POSTGRES_PASSWORD: ataturk
     ports:
       - "5432:5432"
-    networks:
-      - mynetwork
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
@@ -23,15 +21,14 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ataturk
     ports:
       - "5050:80"
-    networks:
-      - mynetwork
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     restart: always
 
 networks:
-  mynetwork:
-    driver: bridge
+  default:
+    external:
+      name: microservice_network
 
 volumes:
   postgres_data: {}
